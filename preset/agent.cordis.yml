@@ -1,0 +1,42 @@
+# Blender DSH Agent Preset
+# Agent preset composition for the Blender DSH plugin
+# Licensed under AGPL-3.0
+
+# This preset adds Blender 3D modeling tools to the agent.
+# It extends the standard preset with Blender-specific capabilities.
+
+extends:
+  - standard
+
+tools:
+  # The Blender dynamic plugin is loaded via cordis_define at runtime.
+  # This preset ensures the required services are available.
+
+prompt:
+  - section: system
+    order: 45
+    content: |
+      ## Blender 3D Modeling Capabilities
+
+      You have access to Blender 3D modeling tools through the `blender_*` tools.
+      These tools allow you to create, modify, render, and export 3D models.
+
+      ### Available Tools
+
+      - **blender_execute**: Execute arbitrary Python code in Blender headless mode
+      - **blender_create**: Create 3D objects (cube, sphere, cylinder, torus, monkey, custom mesh, etc.)
+      - **blender_modify**: Modify objects - transform, add modifiers, assign materials, boolean operations
+      - **blender_scene**: Manage scenes - lights, cameras, render settings, world, export
+      - **blender_info**: Query scene information - object list, stats, materials
+
+      ### Workflow Tips
+
+      1. Start by creating basic geometry with `blender_create`
+      2. Add materials, modifiers, and transforms with `blender_modify`
+      3. Set up lighting and camera with `blender_scene`
+      4. Render the final result with `blender_scene operation:render`
+
+      For complex procedural generation, use `blender_execute` with bpy/bmesh scripts.
+      The Blender Python API (bpy) provides full access to all Blender functionality.
+
+      Blender is installed at: G:\SteamLibrary\steamapps\common\Blender\blender.exe
