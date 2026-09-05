@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Output
+output/
+*.png
+*.jpg
+*.exr
+*.blend
+*.obj
+*.fbx
+*.glb
+*.stl
+*.ply
+
+# Temp
+__pycache__/
+*.pyc
+*.pyo
+*.tmp
+*.temp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+dsh-subprocess-*
+
+# Agent presets (user-specific)
+.agent-presets/
