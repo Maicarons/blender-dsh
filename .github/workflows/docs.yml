@@ -15,7 +15,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,39 +27,29 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Setup Pages
+      - name: Setup Pages (enable if needed)
         uses: actions/configure-pages@v4
+        with:
+          enablement: true
+          static_site_generator: next
 
       - name: Install dependencies
+        working-directory: docs
         run: |
-          cd docs
-          pnpm init -y
-          pnpm add vitepress
+          npm init -y
+          npm install -D vitepress
 
       - name: Build docs
-        run: |
-          cd docs
-          npx vitepress build
+        working-directory: docs
+        run: npx vitepress build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
