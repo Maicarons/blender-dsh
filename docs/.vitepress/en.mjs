@@ -11,7 +11,7 @@ export default defineConfig({
       { text: 'Guide', link: '/en/guide/getting-started' },
       { text: 'Tools', link: '/en/tools/overview' },
       { text: 'Examples', link: '/en/examples/basic-scene' },
-      { text:中文', link: '/' },
+      { text: '中文', link: '/' },
     ],
 
     sidebar: {
